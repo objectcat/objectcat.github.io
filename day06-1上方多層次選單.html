@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="reset.css">
+    <style>
+        nav {
+            background-color: wheat;
+        }
+
+        
+
+        @media screen and (max-width: 767px; ) {
+            nav .btn-sub-control {
+                width: 40px;
+            }
+
+            nav a {
+                flex-grow: 1;
+            }
+
+            
+
+            nav>ul ul {
+                display: none;
+                /* 子選單不顯示 */
+                position: absolute;
+                /* 自己獨立一層 在原地不占空間 不會被子曾撐開 絕對定位 */
+            }
+            nav li {
+                display: flex;
+            }
+
+            nav li:hover ul {
+                display: block;
+                /* 子選單顯示 */
+            }
+
+            nav a {
+                outline: 1px solid red;
+                /* 寫在a上 才能一整塊都是超連結 */
+                display: block;
+                /* inline(padding上下沒用) block */
+                padding: 10px 20px;
+                /* 寫Padding才能一整塊都是超連結 能夠選 */
+            }
+            nav a:hover{
+                background-color: pink;
+            }
+        }
+
+        @media screen and (min-width: 768px; ) {
+            nav .btn-sub-control {
+                display: none;
+            }
+
+            nav a {
+                flex-grow: 1;
+            }
+
+            nav li {
+                display: flex;
+            }
+
+            nav>ul ul {
+                display: none;
+                position: absolute;
+            }
+
+            nav li:hover ul {
+                display: block;
+            }
+
+            nav a {
+                outline: 1px solid red;
+                display: block;
+                padding: 10px 20px;
+            }
+            nav a:hover{
+                background-color: pink;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+
+        <ul>
+            <li><a href="#">Link</a>
+                <button class="btn-sub-control">▶</button>
+                <ul>
+                    <li><a href="#">sub link</li>
+                    <li><a href="#">sub link</li>
+                    <li><a href="#">sub link</li>
+                    <li><a href="#">sub link</li>
+                    <li><a href="#">sub link</li>
+                    <li><a href="#">sub link</li>
+                </ul>
+
+            </li>
+
+
+            <li><a href="#">Link</a>
+                <button class="btn-sub-control">▶</button>
+                <ul>
+                    <li><a href="#">sub link</li>
+                    <li><a href="#">sub link</li>
+                    <li><a href="#">sub link</li>
+                    <li><a href="#">sub link</li>
+                    <li><a href="#">sub link</li>
+                    <li><a href="#">sub link</li>
+                </ul>
+
+            </li>
+
+
+            <li><a href="#">Link</a>
+                <button class="btn-sub-control">▶</button>
+                <ul>
+                    <li><a href="#">sub link</li>
+                    <li><a href="#">sub link</li>
+                    <li><a href="#">sub link</li>
+                    <li><a href="#">sub link</li>
+                    <li><a href="#">sub link</li>
+                    <li><a href="#">sub link</li>
+                </ul>
+
+            </li>
+        </ul>
+    </nav>
+</body>
+
+</html>

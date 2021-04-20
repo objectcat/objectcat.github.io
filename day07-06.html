@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+    <link rel="stylesheet" href="reset.css">
+
+    <style>
+     .modal-title{
+        background-color: hotpink;
+     }
+     .modal-footer{
+
+     }
+     .modal-backdrop{
+        background-color: hotpink;
+     }
+     .popover-header{
+         background-color: rgb(255, 255, 255);
+     }
+
+.popover{
+    border-radius:0%;
+}
+    </style>
+</head>
+
+<body>
+     
+
+
+    <h1>Hello, world!</h1>
+
+
+    <h3 class="btn btn-primary">H3</h3>
+    <p class="btn btn-primary">p</p>
+    <span class="btn btn-primary">SPAN</span>
+    <botton class="btn btn-primary">BOTTON</botton>
+    <inputBTN class="btn btn-primary">INPUT</inputBTN>
+
+    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+        <label class="btn btn-outline-primary" for="btnradio1">Radio 1</label>
+      
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+        <label class="btn btn-outline-primary" for="btnradio2">Radio 2</label>
+      
+        <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+        <label class="btn btn-outline-primary" for="btnradio3">Radio 3</label>
+      </div>
+<br>
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+    -->
+    <div class="container">
+        <p>
+            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+              Link with href
+            </a>
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+              Button with data-bs-target
+            </button>
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target=".GGG" aria-expanded="false" aria-controls="collapseExample">
+                Button with data-bs-target
+              </button>
+          </p>
+          <div class="collapse GGG" id="collapseExample">
+            <div class="card card-body">
+              Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+            </div>
+          </div>
+        </div>
+
+
+<!-- ===================================== -->
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Launch demo modal
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable ">
+      <div class="modal-content ">
+        <div class="modal-header">
+          <h5 class="modal-title " id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet, possimus laborum ab ipsa qui cumque ea! Doloribus nulla, officiis soluta delectus, facilis sequi distinctio expedita minima nisi atque debitis quod!
+          Culpa blanditiis inventore illum nesciunt neque exercitationem rerum, temporibus aliquid labore repellendus debitis magnam laborum excepturi, aperiam veritatis odit tempora totam amet adipisci explicabo commodi assumenda! Dolorum recusandae libero veniam.
+          Laudantium tenetur voluptas pariatur accusantium tempore? Cupiditate soluta libero deserunt labore repellendus velit? Suscipit nobis ipsum quasi in. Eos voluptatem neque illo sed voluptas consequatur minus, mollitia sunt asperiores ex.
+          A repudiandae voluptas iure, obcaecati earum enim voluptatem est nemo exercitationem tempora officiis incidunt et dignissimos blanditiis. Sint incidunt modi consequatur consectetur atque doloremque blanditiis, non maxime voluptas pariatur est?
+          Tempora, maxime. Minima laudantium necessitatibus nam culpa! Ab, voluptatem similique? Explicabo, provident dolor eius dolore itaque dolorem, voluptatibus illum odio minus perspiciatis expedita, quidem accusantium asperiores. Laborum laudantium dolorem id.
+          Culpa alias exercitationem magnam assumenda nostrum ullam iste. Repellat dolorum velit sequi et incidunt dolores alias, explicabo deserunt, beatae ducimus architecto animi ab, dolor cum iste similique nostrum cupiditate excepturi?
+          Totam, voluptas! Consequuntur, quos hic quisquam totam repellendus enim voluptatibus rerum eligendi temporibus dignissimos iste repellat molestiae non in, saepe fugiat, necessitatibus id dicta voluptatem? Totam facilis fugiat tenetur esse!
+          Corrupti mollitia quas magnam veniam molestiae voluptas ex tenetur. Autem aliquid placeat dolorum soluta reprehenderit. Mollitia laboriosam fuga eveniet inventore nulla, eaque unde doloremque dolorem saepe eius, natus voluptas nesciunt.
+          Dicta quod necessitatibus laudantium repellat iure quisquam reprehenderit, dolor consequatur esse tenetur, placeat ad cumque repellendus delectus ipsam! Culpa doloribus laudantium reiciendis molestiae hic voluptate a recusandae illo necessitatibus numquam.
+          Inventore vero excepturi quos cumque provident quia beatae aspernatur expedita placeat ex ipsum iste fugit, eos, aut hic repudiandae nisi eius, maiores quam? Illum quod maiores nostrum ratione labore aliquid?
+          Cum, magni tenetur earum numquam, fugit eum quas aspernatur consequatur tempore recusandae voluptate quidem nam totam eius iusto nostrum repellat voluptas, reiciendis veritatis aliquam sit culpa dolorem cupiditate. Tempora, rerum.
+          Possimus distinctio facilis maxime cum sunt animi eligendi tenetur voluptate perferendis omnis temporibus non fuga, dolorem corporis! Itaque, deleniti cupiditate in, impedit tempora asperiores magni quibusdam tempore quidem voluptates a.
+          Aliquam omnis distinctio tempora tempore minima magni, expedita similique recusandae perspiciatis ullam eligendi assumenda corrupti cupiditate modi quas qui ab tenetur hic ipsa repellat? Magnam voluptate commodi fugiat autem ea?
+          Sed dolorum consectetur vitae nostrum unde, tenetur aut hic itaque quaerat sequi doloremque repudiandae molestias recusandae incidunt omnis velit animi eum odio praesentium! Delectus blanditiis tenetur sequi aut, ad laboriosam.
+          Fugit amet nulla sint doloribus expedita nostrum quos numquam possimus accusantium, cum tempora aliquam voluptates! Ducimus, magnam, ipsa voluptatum ea beatae, natus sit fugit exercitationem quae voluptatibus non eos pariatur!
+          Quam necessitatibus a explicabo maiores. Quod veritatis deserunt illum maxime, doloribus numquam aperiam impedit? Repellendus necessitatibus adipisci beatae vero aperiam? Explicabo eaque dicta itaque ducimus fugit assumenda, quasi odit ea.
+          Incidunt qui reprehenderit deserunt dolores, obcaecati tempore dolorum atque maxime aspernatur reiciendis quibusdam sequi rerum quas nihil minima magni cum quod suscipit quo praesentium! Incidunt mollitia molestiae aut sapiente nobis!
+          Odio itaque aperiam quidem explicabo doloremque temporibus, incidunt non architecto suscipit! Eius iste iusto nostrum officiis iure voluptatibus, dolorem ea architecto modi quo ut nemo facere earum alias porro dignissimos?
+          Recusandae rerum nemo assumenda iusto aut cupiditate necessitatibus ab, libero, impedit enim qui deserunt illum debitis a sint sunt distinctio? Eveniet dolore inventore a sequi. Iure corporis accusamus odit nisi!
+          Quidem quis aperiam quae autem beatae voluptas enim illo assumenda illum eum ratione magnam doloremque error modi, eveniet exercitationem ex quaerat! Assumenda doloremque amet nulla exercitationem ipsam, ipsum fuga molestiae!
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="移過來後跑出的提示工具">
+    Tooltip on top 顯示的文字
+  </button>
+
+  <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" data-bs-placement="bottom" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
+
+
+  <script>var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl)
+    })</script>
+
+    <script>var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+  return new bootstrap.Popover(popoverTriggerEl)
+})</script>
+</body>
+
+</html>

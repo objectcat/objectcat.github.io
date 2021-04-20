@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="reset.css">
+    <style>
+        .main-header {
+            background-color: #444;
+        }
+
+        #menu-check {
+            display: none;
+        }
+
+        .main-nav a {
+            display: block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: red;
+        }
+
+        /* .log-group img{
+            vertical-align: middle;
+            因為H1沒重製所以本身行高設定有誤差 所以沒辦法置中
+        } */
+        @media screen and (max-width:767px) {
+            .logo-group {
+                width: 100%;
+                padding: 10px;
+                box-sizing: border-box;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .logo-group h1{
+                
+            }
+
+            /* .logo-group h1{
+                line-height: 36px;
+                調整航高 因為H1若沒有重製 本身會有行高等等的問題使東西沒辦法置中
+            } */
+            .hb {
+                width: 36px;
+                height: 36px;
+                background-color: #000;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                align-items: center;
+            }
+
+            .hb span {
+                width: 80%;
+                height: 4px;
+                background-color: pink;
+            }
+
+            .main-nav {
+                background-color: blueviolet;
+                display: none;
+
+            }
+            #menu-check:checked~.main-header .main-nav {
+                display: block;
+            }
+        }
+
+        @media screen and (min-width: 768px) {
+            .main-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <input type="checkbox" id="menu-check">
+    <header class="main-header">
+        <div class="logo-group">
+            <h1>
+                <a href="#">
+                    <img src="https://fakeimg.pl/80x36/666">
+                </a>
+            </h1>
+            <label for="menu-check " class="hb">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+        </div>
+        <nav class="main-nav">
+            <a href="#">link</a>
+            <a href="#">link</a>
+            <a href="#">link</a>
+            <a href="#">link</a>
+            <a href="#">link</a>
+        </nav>
+    </header>
+
+</body>
+
+</html>
