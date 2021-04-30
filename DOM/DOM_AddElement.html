@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1>寶可夢圖鑑列表</h1>
+    <button onclick='AddElement()'>加入寶可夢圖片元素</button>
+
+    <div id='container'></div>
+    <div id='result'></div>
+
+
+    <script>
+        function AddElement() {
+            //1.創建與設定HTML元素
+            let img = document.createElement('img');
+            img.setAttribute('src', 'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png');
+
+            //2.選取HTML元素
+            let container = document.getElementById("container");
+            let div = document.querySelector("body div");
+
+            //3.加入元素旗下
+            container.appendChild(img);
+            div.appendChild(img);
+
+            //4.如果HTML畫⾯要加入第⼆張張圖應該如做？
+
+            // 加速第二張圖的指令 複製節點 cloneNode
+            let img2 = img.cloneNode();
+            document.getElementById("result").appendChild(img2);
+        }
+
+
+        // 創造一個h1元素包住DOM這個字串
+        h1 = document.createElement("h1");
+        // 在h1寫上DOM這個字串
+        h1.innerText = "DOM";
+        //路徑 在body上新增元素
+        document.body.append(h1);
+
+
+
+        div = document.createElement("div");         // 創造一個div元素包住DOM這個字串
+
+        p1 = document.createElement("p");         // 創造一個p元素包住windows這個字串
+        p1.innerText="windows";                 //指定資料放入字串
+        p2 = document.createElement("p");
+        p2.innerText="document";
+        p3 = document.createElement("p");
+        p3.innerText="html";
+
+        div.appendChild(p1);   //放入div並產生一個p標籤的字串
+        div.appendChild(p2);
+        div.appendChild(p3);
+
+        document.body.append(div);
+
+        // 同樣的玩法寫UL
+
+        // ul = document.createElement("ul");         // 創造一個div元素包住DOM這個字串
+
+        // li1 = document.createElement("li");         // 創造一個li元素包住windows這個字串
+        // li1.innerText="node";                 //指定資料放入字串
+        // li2 = document.createElement("li");
+        // li2.innerText="nodeList";
+        // li3 = document.createElement("li");
+        // li3.innerText="HTMLcollection";
+
+        // ul.appendChild(li1);   //放入ul並產生一個li標籤的字串
+        // ul.appendChild(li2);
+        // ul.appendChild(li3);
+
+        // document.body.append(ul);
+
+        
+
+        let ul =document.createElement("ul");
+        // 宣告一個ul裝 一個元素ul
+        let lis =["window","document","html"];
+        // 宣告一個陣列 
+        lis.forEach((item,index)=> {
+            let li =document.createElement("li");
+            li.innerText =item;
+            ul.appendChild(li);
+        });
+        document.body.append(ul);
+
+
+
+        
+        // 迴圈版
+        let lis =["window","document","html"];
+        let ul =genUl(ul);
+        document.body.appendChild(ul);
+        
+        function genUl(liArray){
+            let ul = document.createElement("ul");
+
+            liArray.forEach((item,index)=>{
+            li.innerText =item ;
+            ul.appendChild(li);
+            });
+
+            return ul;
+        }
+
+
+
+    </script>
+</body>
+
+</html>
