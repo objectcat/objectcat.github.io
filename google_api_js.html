@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Simple Map</title>
+
+  <style type="text/css">
+    /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+    #map {
+      height: 100%;
+    }
+
+    /* Optional: Makes the sample page fill the window. */
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div id="map"></div>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQ9NbhmgdRduKilpxa3eh6cEUTZUcDIbo&callback=initMap&libraries=&v=weekly"
+    async></script>
+  <script>
+    let url = 'https://raw.githubusercontent.com/taihochan/JsonData/main/%E5%8F%B0%E7%81%A3%E8%A1%8C%E6%94%BF%E5%9C%B0%E5%8D%80.json'; //JOSN檔 
+    let url2 = 'https://raw.githubusercontent.com/taihochan/JsonData/main/%E5%8F%B0%E7%81%A3%E8%87%AA%E4%BE%86%E6%B0%B4%E7%94%A8%E9%87%8F.json';
+
+    const CHU = { lat: 24.760023277465436, lng: 120.95305387069027 }; 
+    //注意這是大括號 下面要做個標註點也是這樣用
+
+    let map;
+    let data = [];
+    let mapdata = [];
+
+    let xhr_data = new XMLHttpRequest();
+    let xhr_map = new XMLHttpRequest();
+    //Ex1
+    window.onload = function () {
+      xhr_map.onload = function () {
+        mapdata = JSON.parse(this.responseText);
+      };
+      xhr_map.open('GET', url);
+      xhr_map.send();
+
+      xhr_data.onload = function () { //抓降雨量
+        data = Object.values(JSON.parse(this.responseText).TaiwanWaterExchangingData.StatisticofWaterResourcesClass).find(x => x.TheConsumptionOfWater).TheConsumptionOfWater; 
+        //抓物件的值 從StatisticofWaterResourcesClass開始抓 接下來幾層都會放的很像同層
+        // console.log(data); //有抓到
+
+      }
+      xhr_data.open('GET', url2);
+      xhr_data.send();
+    }
+
+    function initMap() {
+
+      setTimeout(creatMark, 3000);
+
+      function creatMark() {
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 10, //載入頁面大小 數字越大倍率越近
+          center: CHU,//中心?
+        });
+
+        // console.log(data);  //有抓到
+        mapdata.forEach((places, index) => { //分配mapdata這個JOSN檔案
+
+          let waterdata = data.find(x => x.Town == places.District); 
+          //在data找到所有的town(區域)要符合places.District(區域) 這邊要特別注意 json裡面不同層 要確定資料有抓到
+
+          console.log(waterdata); //確定東西是不是我要的
+
+          let waterText = ''; //初始化不然所有文字會疊再一起
+
+          //宣告三個數 若是不做if  重複就會bug  所以必續做條件式 程式才會跑
+          if (waterdata != undefined) {
+            let Year = waterdata.Year; //從waterdata取的年份 月份 降雨量
+            let Month = waterdata.Month;
+            let Water = waterdata.TheDailyDomesticConsumptionOfWaterPerPerson;
+
+            waterText = `${Year}年${Month}月 人均日用水量${Water}`;
+          }
+          else {
+            waterText = "沒資料拉"; //就真的沒資料
+
+          }
+          //座標 格式要對
+          mapmark = {
+            lat: places.Lat,
+            lng: places.Lng,
+          };
+
+          //下google的標註點
+          new google.maps.Marker({
+            //position 座標
+            position: mapmark,
+            map,
+            //title摸到後的黑色標示
+            title: `${places.City},${places.District},${waterText}`,
+          });
+        });
+
+      }
+
+    }
+
+
+
+    // window.onload = function () {
+    //   xhr.onload = function () {
+    //     employees = JSON.parse(this.responseText);  
+    //   }
+    //   xhr.open('GET', url);
+    //   xhr.send();
+    //   // setTimeout(initMap, 5000);
+    // }
+    // //
+    // function initMap() {
+    //   map = new google.maps.Map(document.getElementById("map"), {
+    //     center: CHU,
+    //     zoom: 12,
+    //   });
+
+    //   // new google.maps.Marker({
+    //   //   position: CHU,//標記位置
+    //   //   map,//標記地圖
+    //   //   title: "Hello World!", //移至圖標顯示訊息
+    //   // });
+
+    //   // text.forEach((item, index) => {
+    //   //   new google.maps.Marker({
+    //   //     position: item,//標記位置
+    //   //     map,//標記地圖
+    //   //     title: {city:item2.city,District:item2.District}, //移至圖標顯示訊息
+    //   //   });
+    //   // });
+
+    //   employees.forEach((item2, index) => {
+
+
+    //       new google.maps.Marker({
+    //       position: { lat: item2.Lat, lng: item2.Lng },//標記位置
+    //       map,//標記地圖
+    //       title:  item2.City + item2.District , //移至圖標顯示訊息
+    //     });
+
+
+
+
+    //   });
+    // }
+
+
+
+  </script>
+</body>
+
+</html>
