@@ -1,5 +1,3 @@
-
-
 <!doctype html>
 <html lang="en">
 
@@ -17,14 +15,17 @@
         table * {
             text-align: center;
         }
+
         td {
             width: 160px;
             height: 125px;
         }
+
         ul {
             overflow-y: auto;
             height: 60px;
         }
+
         li {
             list-style: decimal;
         }
@@ -54,7 +55,8 @@
     <button type="button" class="btn btn-primary" onclick="AddMonth()">往下月</button>
 
     <!-- Modal Add 彈跳視窗 -->
-    <div class="modal fade" id="inputModal" tabindex="-1" role="dialog" aria-labelledby="inputModalLabel" aria-hidden="true">
+    <div class="modal fade" id="inputModal" tabindex="-1" role="dialog" aria-labelledby="inputModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <!-- 時間 -->
@@ -123,35 +125,51 @@
 
             let ul, li;
             let day = 1;
-            let rows = Math.ceil((dayOfMonth + firstDay) / 7); // 共幾列
+            let rows = Math.ceil((dayOfMonth + firstDay) / 7); // 共幾列 不超過6列 不低於5列
             for (let row = 0; row < rows; row++) {
-                let tr = document.createElement('tr');
-                for (let col = 0; col < 7; col++) {
+                let tr = document.createElement('tr'); //製造5到6個橫排 TR
+
+                for (let col = 0; col < 7; col++) {  //每個TR會有7個TD
                     let td = document.createElement('td');
+
                     if (row == 0 && col < firstDay) {
+                        //row==0 是指第一列 col < firstDay 是指該月的第一天是禮拜幾
                         //上個月
-                    } 
+                    }
                     else {
                         if (day <= dayOfMonth) {
+                            //因為day=1從第一天開始 dayOfMonth=這個月有幾天  後面有一個day++ 會讓day一直跑到底並放入日期
+
                             td.innerText = day; // 放入日期
 
                             // 當日
-                            if(date == day && today.getMonth() == new Date(year, month, 1).getMonth()) {
+                            if (date == day && today.getMonth() == new Date(year, month, 1).getMonth()) { 
+                                //date是取得今天的日期如果跟day的數字是一樣的 and 從today取得的月份跟 date取出的月份是一樣的
+
+                                //取得今天的日子 
+
                                 td.style.color = 'red';
-                                td.style.fontWeight = 900;
+                                td.style.fontWeight = 900; //文字粗細
                             }
 
-                            // 放入代辦清單
-                            if(localStorage.getItem(`${year}-${month+1}-${day}`) != null) {
-                                ul = document.createElement('ul');
+                            // 放入代辦清單 如果我的瀏覽器儲存器 裡面 有getitem取得清單   
+                            if (localStorage.getItem(`${year}-${month + 1}-${day}`) != null) {
 
-                                let todoList = JSON.parse(localStorage.getItem(`${year}-${month+1}-${day}`));
+                                //製造一個ul
+                                ul = document.createElement('ul');
+                                
+                                //todoList 待辦事項清單
+
+                                let todoList = JSON.parse(localStorage.getItem(`${year}-${month + 1}-${day}`));
+
+                                //在儲存器裡面的todoList 被解析成JOSN檔 可以被FOREACH
 
                                 todoList.forEach(item => {
+                                    
                                     li = document.createElement('li');
 
                                     li.innerText = item.title;
-                                    li.id = `${year}-${month+1}-${day} ${item.title}`
+                                    li.id = `${year}-${month + 1}-${day} ${item.title}`
 
                                     ul.appendChild(li)
                                 });
@@ -162,7 +180,7 @@
 
                             td.addEventListener('click', function (e) {
                                 let target;
-                                if(e.target.localName == 'li' || e.target.localName == 'ul') {
+                                if (e.target.localName == 'li' || e.target.localName == 'ul') {
                                     target = e.target.offsetParent;
                                 }
                                 else {
@@ -171,7 +189,7 @@
 
                                 if (e.target && e.target.matches("li")) { // 修改
                                     $('#infoModal').modal('show');
-                                    let adate = `${year}-${month+1}-${target.childNodes[0].data}`;
+                                    let adate = `${year}-${month + 1}-${target.childNodes[0].data}`;
 
                                     document.getElementById('info-date').value = adate;
                                     document.getElementById('info-todo-item').value = e.target.innerText;
@@ -181,7 +199,7 @@
                                     }
                                     let todoList = [];
                                     todoList = JSON.parse(localStorage.getItem(adate));
-                                    todoList = todoList.filter(function(item) {
+                                    todoList = todoList.filter(function (item) {
                                         return !item.title.match(e.target.innerText);
                                     })
                                     localStorage.setItem(adate, JSON.stringify(todoList));
@@ -191,10 +209,10 @@
 
                                     $('#inputModal').modal('show');
 
-                                    document.getElementById('date').value = `${year}-${month+1}-${target.childNodes[0].data}`;
+                                    document.getElementById('date').value = `${year}-${month + 1}-${target.childNodes[0].data}`;
                                 }
                             })
-                            
+
                         }
                         else {
                             //下個月
@@ -234,7 +252,7 @@
             }
             let todoList = [];
 
-            if(localStorage.getItem(date) == null) {
+            if (localStorage.getItem(date) == null) {
                 todoList.push(todoObj);
                 //今天沒有待辦事項
             }
@@ -268,15 +286,15 @@
 
             console.log("++++", todoObj);
             let neww;
-            if(localStorage.getItem(date) == null) {
-                todoList = todoList.filter(function(item) {
+            if (localStorage.getItem(date) == null) {
+                todoList = todoList.filter(function (item) {
                     return !item.title.match(todoItem);
                 })
                 //今天沒有待辦事項
             }
             else {
                 todoList = JSON.parse(localStorage.getItem(date));
-                todoList = todoList.filter(function(item) {
+                todoList = todoList.filter(function (item) {
                     return !item.title.match(todoItem);
                 })
                 //今天已有待辦事項
@@ -298,7 +316,7 @@
             let todoList = [];
 
             console.log("++++", todoObj);
-            if(localStorage.getItem(date) == null) {
+            if (localStorage.getItem(date) == null) {
                 todoList.push(todoObj);
                 //今天沒有待辦事項
             }
