@@ -1,3 +1,6 @@
+
+
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -14,46 +17,54 @@
         table * {
             text-align: center;
         }
+        td {
+            width: 160px;
+            height: 125px;
+        }
+        ul {
+            overflow-y: auto;
+            height: 60px;
+        }
+        li {
+            list-style: decimal;
+        }
     </style>
 </head>
 
 <body>
-    <h1 id="year-month">動態顯示年跟月</h1>
+    <h1 id="year-month">0000年-00月</h1>
     <table class="table">
-
-        <div class="row d-flex justify-content-between ">
-            <button type="button" class="btn btn-info px-4" onclick="MinMonth()">往上月</button>
-            <button type="button" class="btn btn-info px-4" onclick="AddMonth()">往下月</button>
-        </div>
-
+        <!-- 行標題 -->
         <thead>
             <tr>
-                <th>日</th>
-                <th>一</th>
-                <th>二</th>
-                <th>三</th>
-                <th>四</th>
-                <th>五</th>
-                <th>六</th>
+                <th>SUN</th>
+                <th>MON</th>
+                <th>TUE</th>
+                <th>WED</th>
+                <th>THU</th>
+                <th>FRI</th>
+                <th>SAT</th>
             </tr>
         </thead>
         <tbody>
             <!-- 動態生成日期 -->
         </tbody>
     </table>
+    <button type="button" class="btn btn-primary" onclick="MinMonth()">往上月</button>
+    <button type="button" class="btn btn-primary" onclick="AddMonth()">往下月</button>
 
-
-    <!-- Modal Add -->
-    <div class="modal fade" id="inputModal" tabindex="-1" role="dialog" aria-labelledby="inputModalLabel"
-        aria-hidden="true">
+    <!-- Modal Add 彈跳視窗 -->
+    <div class="modal fade" id="inputModal" tabindex="-1" role="dialog" aria-labelledby="inputModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
+                <!-- 時間 -->
                 <div class="modal-header">
                     <h5 class="modal-title" id="inputModalLabel">Add</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+                <!-- 輸入框 -->
                 <div id="input-area" class="modal-body">
                     <input readonly id="date" type="text">
                     <input id="todo-item" type="text">
@@ -71,116 +82,119 @@
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-
                 <div class="modal-header">
                     <h5 class="modal-title" id="infoModalLabel">Info</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-
                 <div id="info-area" class="modal-body">
                     <input readonly id="info-date" type="text">
                     <input id="info-todo-item" type="text">
                 </div>
-
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" onclick="EditTodoItem()">修改</button>
                     <button type="button" class="btn btn-primary" onclick="DeleteTodoItem()">刪除</button>
                 </div>
-
             </div>
         </div>
     </div>
     <script>
         //今天
-        let today = new Date();  //取的台北標準時間 今天的
-
-        // console.log(today); //取得台北標準時間 今天的
+        let today = new Date();
 
         //年月日
-        let year = today.getFullYear(); //取得今年
-        let month = today.getMonth();   //取得這月
-        let date = today.getDate();     //取得今天幾號
-
-        // console.log(date);
-
+        let year = today.getFullYear();
+        let month = today.getMonth();
+        let date = today.getDate();
 
         function Init() {
+            // 初始化
+            let tbody = document.getElementsByTagName('tbody')[0]; // 因為是array所以用[0]
+            tbody.innerHTML = ''
 
-            let tbody = document.getElementsByTagName('tbody')[0]; //取得第一個TBODY
-            tbody.innerHTML = ''  //初始化
+            // 標題
+            document.getElementById('year-month').innerText = `${new Date(year, month, 1).getFullYear()}年 - ${new Date(year, month, 1).getMonth() + 1}月`
 
-            //取得HTML並加入
-            document.getElementById('year-month').innerText =
-                `${new Date(year, month, 1).getFullYear()}年 - ${new Date(year, month, 1).getMonth() + 1}月`
-
-
-
-            //第一天禮拜幾
+            //這個月第一天是禮拜幾
             let firstDay = new Date(year, month, 1).getDay();
-            // console.log(firstDay);
             //取這個月有幾天
             let dayOfMonth = new Date(year, month + 1, 0).getDate();
-            // console.log(dayOfMonth);
 
+            let ul, li;
             let day = 1;
-
-            let rows = Math.ceil((dayOfMonth + firstDay) / 7);   //  Math.ceil 取得這個數的最小整數 rows不是5就是6
-            
-            // console.log(rows);  
-
+            let rows = Math.ceil((dayOfMonth + firstDay) / 7); // 共幾列
             for (let row = 0; row < rows; row++) {
-                //建立5或6個tr 
                 let tr = document.createElement('tr');
-
-                //建立7個 col
                 for (let col = 0; col < 7; col++) {
-
                     let td = document.createElement('td');
-
-                    
                     if (row == 0 && col < firstDay) {
                         //上個月
-                    }
+                    } 
                     else {
-                        if (day <= dayOfMonth) 
-                        {
-                            td.innerText = day;
+                        if (day <= dayOfMonth) {
+                            td.innerText = day; // 放入日期
 
-                            //localStorage.getItem 取出資料的語法
-                            if (localStorage.getItem(`${year}-${month + 1}-${day}`) != null) {
+                            // 當日
+                            if(date == day && today.getMonth() == new Date(year, month, 1).getMonth()) {
+                                td.style.color = 'red';
+                                td.style.fontWeight = 900;
+                            }
 
-                                let ul = document.createElement('ul');
+                            // 放入代辦清單
+                            if(localStorage.getItem(`${year}-${month+1}-${day}`) != null) {
+                                ul = document.createElement('ul');
 
-                                let todoList = JSON.parse(localStorage.getItem(`${year}-${month + 1}-${day}`));
+                                let todoList = JSON.parse(localStorage.getItem(`${year}-${month+1}-${day}`));
 
                                 todoList.forEach(item => {
-
-                                    let li = document.createElement('li');
+                                    li = document.createElement('li');
 
                                     li.innerText = item.title;
+                                    li.id = `${year}-${month+1}-${day} ${item.title}`
 
                                     ul.appendChild(li)
                                 });
 
                                 td.appendChild(ul);
+
                             }
-
-
 
                             td.addEventListener('click', function (e) {
                                 let target;
-                                if (e.target.localName == 'li' || e.target.localName == 'ul') {
+                                if(e.target.localName == 'li' || e.target.localName == 'ul') {
                                     target = e.target.offsetParent;
-                                } else {
+                                }
+                                else {
                                     target = e.target;
                                 }
 
-                                $('#inputModal').modal('show');
+                                if (e.target && e.target.matches("li")) { // 修改
+                                    $('#infoModal').modal('show');
+                                    let adate = `${year}-${month+1}-${target.childNodes[0].data}`;
 
-                                document.getElementById('date').value = `${year}-${month + 1}-${target.childNodes[0].data}`;
+                                    document.getElementById('info-date').value = adate;
+                                    document.getElementById('info-todo-item').value = e.target.innerText;
+
+                                    let todoObj = {
+                                        title: e.target.innerText
+                                    }
+                                    let todoList = [];
+                                    todoList = JSON.parse(localStorage.getItem(adate));
+                                    todoList = todoList.filter(function(item) {
+                                        return !item.title.match(e.target.innerText);
+                                    })
+                                    localStorage.setItem(adate, JSON.stringify(todoList));
+                                }
+                                else { // 新增
+                                    let todoItem = document.getElementById('todo-item').value;
+
+                                    $('#inputModal').modal('show');
+
+                                    document.getElementById('date').value = `${year}-${month+1}-${target.childNodes[0].data}`;
+                                }
                             })
+                            
                         }
                         else {
                             //下個月
@@ -210,6 +224,7 @@
             Init();
         }
 
+        // 儲存待辦事項
         function SaveTodoItem() {
             let date = document.getElementById('date').value;
             let todoItem = document.getElementById('todo-item').value;
@@ -219,7 +234,71 @@
             }
             let todoList = [];
 
-            if (localStorage.getItem(date) == null) {
+            if(localStorage.getItem(date) == null) {
+                todoList.push(todoObj);
+                //今天沒有待辦事項
+            }
+            else {
+                todoList = JSON.parse(localStorage.getItem(date));
+                todoList.push(todoObj);
+                //今天已有待辦事項
+            }
+
+            localStorage.setItem(date, JSON.stringify(todoList));
+
+            Init();
+        }
+
+        Array.prototype.remove = function (val) {
+            var index = this.indexOf(val);
+            if (index > -1) {
+                this.splice(index, 1);
+            }
+        };
+
+        // 刪除待辦事項
+        function DeleteTodoItem() {
+            let date = document.getElementById('info-date').value;
+            let todoItem = document.getElementById('info-todo-item').value;
+
+            let todoObj = {
+                title: todoItem
+            }
+            let todoList = [];
+
+            console.log("++++", todoObj);
+            let neww;
+            if(localStorage.getItem(date) == null) {
+                todoList = todoList.filter(function(item) {
+                    return !item.title.match(todoItem);
+                })
+                //今天沒有待辦事項
+            }
+            else {
+                todoList = JSON.parse(localStorage.getItem(date));
+                todoList = todoList.filter(function(item) {
+                    return !item.title.match(todoItem);
+                })
+                //今天已有待辦事項
+            }
+            console.log(todoList);
+            localStorage.setItem(date, JSON.stringify(todoList));
+
+            Init();
+        }
+
+        // 修改待辦事項
+        function EditTodoItem() {
+            let date = document.getElementById('info-date').value;
+            let todoItem = document.getElementById('info-todo-item').value;
+
+            let todoObj = {
+                title: todoItem
+            }
+            let todoList = [];
+
+            console.log("++++", todoObj);
+            if(localStorage.getItem(date) == null) {
                 todoList.push(todoObj);
                 //今天沒有待辦事項
             }
