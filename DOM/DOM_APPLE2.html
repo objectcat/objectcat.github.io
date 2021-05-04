@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="">
+    <title></title>
+
+    <style>
+        a {
+            text-decoration: none;
+        }
+
+        .w-1000px {
+            width: 1000px;
+            box-sizing: border-box;
+        }
+
+        .box-border-box {
+            box-sizing: border-box;
+        }
+
+        .text-transparent {
+            color: transparent;
+        }
+
+        .wh-50px {
+            width: 50px;
+            height: 50px;
+        }
+
+        .btn-line-height {
+            line-height: 50px;
+        }
+
+        .fs-14px {
+            font-size: 14px;
+        }
+
+        .btn_active {
+            border-color: blue;
+        }
+
+        .btn-light {
+            border: 2px solid lightgray;
+        }
+
+        .btn-light:hover {
+            border: 2px solid gray;
+        }
+
+        .btn-check:checked+.btn-light {
+            border: 2px solid dodgerblue;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="d-none" name="h1">Apple</h1>
+    <!-- //放apple的分頁名稱 -->
+    <nav class="bar navbar-dark bg-dark text-center">
+    </nav>
+    <!-- 導覽列新增Class樣式調整 -->
+    <div class="container w-1000px">
+        <!-- 製造一個背景框架 -->
+        <div class="row">
+            <!-- 製造空間用row給他橫排 -->
+            <div class="col-12 col-lg-6 " id="pic">
+            </div>
+            <!-- 左邊一格圖片 -->
+
+            <div class="col-12 col-lg-6" id="info">
+            </div>
+        </div>
+        <!-- 右邊一格選項列表 -->
+
+    </div>
+    <!-- <img src="" class=""> -->
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+        integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
+        integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc"
+        crossorigin="anonymous"></script>
+
+    <script>
+        var data = [];
+        const url = "https://raw.githubusercontent.com/yijulin/BuildSchool-FrontEnd-2021/main/HomeWork/HW0413/20210413.json";
+
+        let xhr = new XMLHttpRequest();
+        window.onload = function () {
+            xhr.onload = function () {
+                data = JSON.parse(this.responseText);
+                console.log(data);
+                setNav();
+            }
+            xhr.open('GET', url);
+            xhr.send();
+        }
+
+        //製作上放NAV 給予超連結來源 來源由for依序放入
+        function setNav() {
+            let Nav = document.querySelector('nav');
+            data.forEach((items, index) => {
+                let a = document.createElement('a');
+                a.innerHTML = items.category;
+                a.setAttribute("class", "  d-inline-block text-light p-5")
+                a.href = `javascript:show("${items.category}")`; //超連結放入
+                Nav.appendChild(a);
+
+            });
+        }
+
+        //從for each內製作 類型 跟 名稱
+        function show(category) {
+            // find() 方法，回到陣列中找到的元素的值
+            let item = data.find(x => x.category == category);
+            let type = item.type; //機型
+
+            // 左圖 圖片可以順便放入 BST的 class
+            let pic = document.getElementById('pic');
+            pic.innerHTML = `<img src="img/${type}.png" class="w-100 p-4">`
+
+
+
+            // 右方手機 平板那些的 標題資訊欄  row
+            let infobox = document.getElementById("info")
+            infobox.innerHTML = "";
+            // 初始化
+            //做一個DIV
+            let info = document.createElement("div");
+            info.setAttribute("class", 'py-2 ps-4')
+
+
+
+
+            //標題h2
+            let h2 = document.createElement("h2");
+            h2.setAttribute('class', 'fw-bold  ');
+            info.innerHTML = `購買${type}`;
+
+
+            //顏色框框按鈕 要點選圈圈的那種
+            let info_p_color = document.createElement("p");
+            info_p_color.setAttribute("class", "fw-bold  ")
+            info_p_color.innerHTML = "選擇外觀 .";
+
+            //製作一個橫排結構的div  要包BTN用的 最後要把東西放進來
+            let btnbox_color = document.createElement("div");
+            btnbox_color.setAttribute("class", "row")
+
+            //製作內容
+
+
+            //製作顏色的按鈕 
+            let colors = item.colors;  //抓取圖片的顏色之後要用
+            colors.forEach((colors, index) => {  //用foreach分配
+                let btn_radio = document.createElement("input");
+                btn_radio.type = "radio";  //input的勾選版
+                btn_radio.name = "color";  //給他forEach各個顏色的名稱
+                btn_radio.id = `color_${colors.color}`;  //給他forEach各個顏色的名稱 ID
+                btn_radio.setAttribute("class", "btn-check"); //讓他可點選
+
+                let btn = document.createElement("label"); //製作按鈕
+                btn.setAttribute('for', `color_${colors.color}`);
+                btn.setAttribute("class", "btn btn-info d-flex flex-column align-items-center col-5 p-3 m-0 rounded-circle  ");
+
+                //點選時放入HTML格式的圖片 並在圖片編號內做迴圈放入
+                btn.onclick = function () {
+                    pic.innerHTML = `'<img src = img/${type}-${colors.color}.png class="w-100">'`
+                }
+
+                let btn_img = document.createElement("img");
+                btn_img.setAttribute("class", "d-block rounded-circle btn-line-height p-1 m-0 ");
+                btn_img.src = `img/${colors.color}.png`
+
+                let btn_p = document.createElement("p");
+                btn_p.setAttribute("class", "p-2");
+                btn_p.innerHTML = `${colors.chinese}`;
+
+                
+                btn.appendChild(btn_img);
+                btn.appendChild(btn_p);
+                btnbox_color.appendChild(btn_radio);
+                btnbox_color.appendChild(btn);  
+            });
+
+
+            /*容量  跟上方製作流程相同*/
+            let p_name_GB = document.createElement("p");
+            p_name_GB.setAttribute('class', 'fw-bold py-2');
+            p_name_GB.innerHTML = "儲存容量。";
+
+            let btnbox_name = document.createElement("div");
+            btnbox_name.setAttribute('class', 'row');
+
+            let capacitys = item.capacitys;
+            capacitys.forEach((item, index) => {
+                let capacity = item.capacity;
+                let price = item.price;
+
+                let btn_radio = document.createElement("input");
+                btn_radio.type = "radio";
+                btn_radio.name = "capacity";
+                btn_radio.id = `capacity${capacity}`;
+                btn_radio.setAttribute('class', 'btn-check');
+
+                let btn = document.createElement("label");
+                btn.setAttribute('for', `capacity${capacity}`);
+                btn.setAttribute('class', 'btn btn-light d-flex flex-column align-items-center col-5 p-1 m-0 rounded-circle justify-content-center   ');
+
+
+                
+                let p_price = document.createElement("p");
+                p_price.setAttribute('class', ' fs-14px');
+                p_price.innerHTML = `NT$${(price)}`;
+
+                let p_capacity = document.createElement("p");
+                p_capacity.setAttribute('class', ' fw-bold');
+                p_capacity.innerHTML = `<span class="fs-4 ">${capacity} GB</span>`;
+
+                btn.appendChild(p_capacity);
+                btn.appendChild(p_price);
+
+                btnbox_name.appendChild(btn_radio);
+                btnbox_name.appendChild(btn);
+
+               
+                
+
+
+                //製造一個方法 點擊的時候 改變價錢 並把價錢的項目放進製造好的div
+                //點一次執行一次
+                btn.onclick = function () {
+                price_p.innerHTML=`TWD$ ${(price)}`
+                info.appendChild(info_price_box)
+
+                }
+
+
+            });
+
+            //製造一個div 放一個內文的空間 方法內容不可放在迴圈裡 會卡死
+
+            let info_price_box = document.createElement("div");
+                info_price_box.setAttribute('class', 'bg-dark  m-0 p-1 rounded-circle d-flex justify-content-center text-light ');
+
+                let price_p = document.createElement("p");
+                price_p.setAttribute('class', 'fs-2 fw-bold m-0');
+                info_price_box.appendChild(price_p);
+            
+
+
+
+
+
+            info.appendChild(h2);
+            info.appendChild(info_p_color);
+            info.appendChild(btnbox_color);
+            info.appendChild(p_name_GB);
+            info.appendChild(btnbox_name);
+
+            infobox.appendChild(info);
+
+
+        }
+
+
+
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div id="championsCarousel" class="carousel slide" data-ride="carousel" style="visibility:hidden"> 
+        <!-- //侵入式一開始隱藏 -->
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li> 
+            <!-- //1234張圖片 -->
+            <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+            <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+            <li data-target="#carouselExampleCaptions" data-slide-to="3"></li>
+        </ol>
+        <div class="carousel-inner"> 
+            <!-- //圖片 -->
+            <div class="carousel-item active">
+                <img src="" class="d-block w-100" alt="" data-interval="3000"> 
+                <!-- //data-interval="3000" 每張幻燈片SHOW的時間 -->
+                <div class="carousel-caption d-none d-md-block"> 
+                    <!-- //結構 -->
+                    <h5>slider1</h5>
+                    <p>說明文字</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="" class="d-block w-100" alt="" data-interval="3000">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>slider2</h5>
+                    <p>說明文字</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="" class="d-block w-100" alt="" data-interval="3000">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>slider3</h5>
+                    <p>說明文字</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="" class="d-block w-100" alt="" data-interval="3000">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>slider4</h5>
+                    <p>說明文字</p>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#championsCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#championsCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+
+
+    <script>
+        const url = "https://ddragon.leagueoflegends.com/cdn/10.22.1/data/zh_TW/champion.json";
+
+        let namesArray = [];    //我要抓OBJECT的KEY 要宣告一個陣列接 
+        let championsObject = {};   //
+        window.onload = function () {
+            fetch(url)
+                .then(response => response.json())  //response 回傳的是result 可以用text()轉為字串 或 json()解析成物件 抓物件要使用key
+                .then(result => {
+                    // console.log(typeof result);   //typeof 
+                    // console.log(result);   //typeof 
+                    championsObject = result.data; 
+                    namesArray = Object.keys(championsObject); 
+                    // console.log(namesArray);    
+
+                    setSliders(); //準備設置DOM投影片的方法
+
+                })
+                .catch(ex => {
+                    console.log(ex);
+                })
+                .finally(() => {
+                    document.querySelector('#championsCarousel').style.visibility = 'visible';
+                    //因為championsCarousel 有設定隱藏 所以在這邊要用visibility='visibile'  把他抓出來
+                });
+        }
+
+        function setSliders(){
+            let carouselItems =document.querySelectorAll('.carousel-item'); //如何選取所有的幻燈片 抓class的carousel-item
+            // console.log(carouselItems);  //確定有沒有抓到 //抓到NODELIST NODELIST可以疊代
+            carouselItems.forEach((item , index)=>{
+                
+                item.setAttribute("data-interval",'2000');
+
+                item.querySelector("img").src =`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${namesArray[index]}_0.jpg`;
+                let name = namesArray[index];
+                item.querySelector("h5").innerText=championsObject[name].id +'-'+championsObject[name].name;
+                item.querySelector("p").innerText =championsObject[name].blurb;
+                // item.querySelector("img");  
+                //data-interval 每隔幾(秒)換下一張圖片
+
+            });
+            
+            let images =document.querySelectorAll('.carousel-item img'); //抓4個幻燈片的圖片
+            images.forEach((img,index)=>{  //直接做蝶帶 
+                let imgUrl=`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${namesArray[index]}_0.jpg`; //抓每一張卡牌的時候名字可以按照每個index給予編號上的名字
+
+                img.src=imgUrl;
+            })
+            let title =document.querySelectorAll('.carousel-item h5'); //抓4個幻燈片的title
+            title.forEach((title, index)=>{ //抓到title以後做蝶代處理
+                let name =namesArray[index]; //宣告name來抓蝶代的內容
+                title.innerHTML = championsObject[name].id+'-'+championsObject[name].name
+            });
+            let ps =document.querySelectorAll('.carousel-item p'); //抓4個幻燈片的內文p
+            ps.forEach((p, index)=>{ //抓到title以後做蝶代處理
+                let name =namesArray[index]; //宣告name來抓蝶代的內容
+                p.innerHTML = championsObject[name].blurb;
+            });
+        }
+    </script>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+        integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+        crossorigin="anonymous"></script>
+</body>
+
+
+</html>

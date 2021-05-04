@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+    <style>
+        .box {
+            display: flex;
+        }
+
+        .box div {
+            width: 150px;
+            height: 150px;
+        }
+
+    </style>
+
+    <title>Hello, world!</title>
+</head>
+
+<body>
+    <div class="box">
+        <div id="div_1">1</div>
+        <div class="div_2"></div>
+        <div class="div_2"></div>
+        <div id="div_1 div_2"></div>
+        <div></div>
+    </div>
+    <h1 id="h1">title</h1>
+    <h1 id="h1_2">title2</h1>
+
+    <input id="input" type="text">
+
+    <botton id="botton">click me</botton>
+
+    <img id="img" src="" alt="">
+
+    <input id="pwd-input" type="text">
+
+
+
+    <script>
+        let h1 = document.getElementById("h1");
+        console.log(h1);
+        console.dir(h1);
+        // 抓出他DOM的所有元素在CONSOLE上
+
+        let array = [
+            { Name: 'bbb', Age: 11 },
+            { Name: 'aaa', Age: 12 },
+            { Name: 'sss', Age: 13 },
+            { Name: 'www', Age: 10 },
+        ]
+        // console.warn("451");
+        // console.error("789");
+
+        console.table(array);
+        // 以陣列的形式 可以在除錯的視窗 做出表格
+
+        for (let i = 0; i < array.length; i++) {
+            console.log(array[i]);
+        }
+
+        for (let item in array) {
+            console.log(array[item]);
+        }
+
+        // for in 拿出來是索引 index
+
+        for (let item of array) {
+            console.log(item);
+        }
+        // for of 拿出來是值 
+
+        array.forEach((x, index) => {
+            console.log(`value: ${JSON.stringify(x)},index: ${index}`);
+        });
+
+
+        // 物件可以用FOR IN 去RUN 
+        // console.warn 在瀏覽器創作者模式上 會有警告 比較好辨認
+
+        let obj = {
+            Name: 'aaa',
+            Age: 0,
+            Issingle: false,
+            Sex: 'male',
+            Weight: 10,
+            Height: 10,
+        }
+
+        for (let item in obj) {
+            console.warn(`${item}: ${obj[item]}`);
+        }
+
+
+
+        // selector
+        //by id  回傳單一元素
+        let div_1 = document.getElementById("div_1");
+        console.log(div_1);
+
+        // by class 回傳一個集合 所以後面可以+一個 index [0]
+        let div_2 = document.getElementsByClassName("div_2")[0];
+        console.log(div_2);
+
+        //by Tag name 回傳一個集合 抓的是標籤tag 比如抓div就會抓所有的div
+        let div_3 = document.getElementsByTagName('div');
+        console.log(div_3);
+
+        //by css selector
+        // 回傳單一元素  可以抓 tag id class 
+        let div_4 = document.querySelector('body > div'); //兩種選擇方式
+        // let div_4 = document.querySelector('.box');
+
+        //回傳所有元素 可以抓 tag id class 
+        let div_5 = document.querySelectorAll('.div_2');
+
+        // console.log(div_1);
+        // console.log(div_2);
+        // console.log(div_3);
+        // console.log(div_4);
+        console.log("===");
+        console.log(div_5);
+
+
+        let H1 = document.getElementById("h1");
+        H1.innerText = "hello world <input type = 'text'/>";
+
+        let H1_2 = document.getElementById("h1_2");
+        H1_2.innerHTML = "hello world <input type = 'text'/>";
+
+        let Input =document.getElementById('input');
+        Input.value="ABCDEFG";
+        H1.style.color ="#ff0000";
+
+        let Button =document.getElementById('botton');
+        Button.style.fontSize = '36px';
+        Button.classList.add('p-5');
+        Button.classList.add('btn','btn-info');
+
+        // Button.onclick =function(){
+        //     setTimeout(()=>{
+        //         Button.classList.replace('btn-danger','btn-primpary');
+        //     },300)
+        //     setTimeout(()=>{
+        //         Button.classList.replace('btn-danger','btn-primpary');
+        //     },600)
+        //     setTimeout(()=>{
+
+        //         Button.classList.replace('btn-danger','btn-primpary');
+        //     },900)
+        //     setTimeout(()=>{
+
+        //         Button.classList.replace('btn-danger','btn-primpary');
+        //     },1200)
+        //     setTimeout(()=>{
+
+        //         Button.classList.replace('btn-danger','btn-primpary');
+        //     },1500)
+        //     setTimeout(()=>{
+        //         Button.classList.replace('btn-danger','btn-primpary');
+        //     },1800)
+        // }
+
+        let img = document.getElementById('img');
+        img.setAttribute('src','http://placekitten.com/g/200/300')
+        img.setAttribute('class','w-20')
+        let pwd_input =document.getElementById('pwd-input');
+        pwd_input.setAttribute('type','password');
+        // type就是input內建的type="text"  password就是一個樣式套用後密碼都會變成***
+
+        Button.setAttribute('custom',`{"Name": "洗手乳", "Price":100}`);
+        Button.onclick =function(){
+            let product =JSON.parse(Button.getAttributeNode('custom').value);
+            h1.innerText =`'名稱'${product.Name} 價格${product.Price}`;
+
+        }
+    </script>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+    -->
+
+
+
+
+
+
+</body>
+
+</html>

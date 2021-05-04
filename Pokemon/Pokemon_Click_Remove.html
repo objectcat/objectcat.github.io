@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>寶可夢圖鑑列表</h1>
+    <button id='addone' onclick="addPokemon()">Click +1</button>
+    <button id='removeone' onclick="removePokemon()">Clear -1</button>
+    <button id='loadall' onclick="loadAllPokemon()">Load All</button>
+    <button id='reset' onclick="resetPokemon()">Reset</button>
+    <button id='timer'>Timer</button>
+    <button id='stop'>Stop Timer</button>
+
+    <div id='container'></div>
+
+    <script>
+        let container = document.getElementById("container");
+        let index = 1;  //Picture
+        let intervalId = -1;
+
+
+        window.onload = appendPokemon();
+
+        function addPokemon() {
+            let img = document.createElement('img');
+            let no = index.toString().padStart(3, '0'); //若沒有三位數 前方補0
+            // img.src
+            img.setAttribute("src", `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${no}.png`)
+
+            // img.addEventListener('click',function(){  
+            //匿名方法
+            // })
+
+            img.addEventListener('click', removeImg)
+
+            container.appendChild(img);
+            index++;
+
+        }
+
+        //remove pic
+        function removePokemon() {
+            let len = container.childNodes.length; //查看有幾個子元素 比如有五張圖 就會是5
+            if (len > 0) {
+                container.removeChild(container.childNodes[len - 1]);
+                index > 1 ? index-- : index;
+            }
+        }
+        function loadAllPokemon() {
+            container.innerHTML = '';  //清空
+            // container.childNodes.length=0;  //陣列清空 就是length設成0 所以這樣也可以
+            for (let i = 1; i < 898; i++) {
+                let img = document.createElement('img');
+                let no = i.toString().padStart(3, '0');
+                // img.src
+                img.setAttribute("src", `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${no}.png`)
+
+                // img.addEventListener('click',function(){  
+                //匿名方法
+                // })
+
+                img.addEventListener('click', removeImg)
+                container.appendChild(img);
+                index++;
+            }
+        }
+         
+
+        function resetPokemon() {
+            container.innerHTML = '';
+            index=1;
+        }
+
+        function appendPokemon() {
+            let img = document.createElement('img');
+            // img.src
+            img.setAttribute("src", `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png`)
+            // img.addEventListener('click',function(){  
+            //匿名方法
+            // })
+            img.addEventListener('click', removeImg)
+
+            container.appendChild(img);
+            index++;
+        }
+
+        function removeImg(event) {
+            container.removeChild(event.target);
+        }
+
+        
+        let timer =document.getElementById('timer');
+        timer.addEventListener('click',function(){
+            intervalId=setInterval(addPokemon,500);
+        
+            timer.disabled = true; // 鎖住按鈕
+        });
+
+        let stop =document.getElementById('stop');
+        stop.addEventListener('click', function(){
+            clearInterval(intervalId);
+            timer.disabled = false;//開啟按鈕
+
+        });
+
+
+
+
+       
+
+
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+    <style>
+        div{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .l1{
+            width: 500px;
+            height: 500px;
+            background-color: green;
+        }
+        .l2{
+            width: 300px;
+            height: 300px;
+            background-color: yellow;
+        }
+        .l3{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+  </head>
+  <body>
+
+    <!-- 三個按鍵不同的委派方式 -->
+
+   <button id="btn1"  onclick="One() ">btn1</button>
+   <button id="btn2">btn2</button>
+   <button id="btn3">btn3</button>
+
+   <div class="l1">
+       <div class="l2">
+           <div class="l3">
+
+           </div>
+       </div>
+   </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+
+    <script>
+        // getElementsByClassName 回傳是集合 所以必須要[0] 才能選到東西
+
+        let l1 = document.getElementsByClassName('l1')[0];
+        let l2 = document.getElementsByClassName('l2')[0];
+        let l3 = document.getElementsByClassName('l3')[0];
+        // 當l1被點擊以後執行 function
+        l1.onclick =function()
+        {
+            // alert 是瀏覽器跳出訊息
+            alert('我按了L1');
+        }
+        l2.onclick =function()
+        {
+            alert('我按了L2');
+        }
+        l3.onclick =function()
+        {
+            alert('我按了L3');
+        }
+
+
+        let btn1 =document.getElementById('btn1');
+        let btn2 =document.getElementById('btn2');
+        let btn3 =document.getElementById('btn3');
+
+        // // 第二種 onclick只能委派一個事件
+        // btn2.onclick =Two;
+        // // 第三種 addEventListener 可以委派多個事件
+        // btn3.addEventListener('click',Three);
+
+        btn2.onclick =function()
+        {
+            sayHello('丁丁');
+        }
+
+        btn3.addEventListener('click',function()
+        {
+            sayHello('迪西');
+        })
+
+
+        function One(){
+            alert('One');
+        }
+        function Two(){
+            alert('Two');
+        }
+        function Three(){
+            alert('Three');
+        }
+        function sayHello(person){
+            alert(`${person}說你好`);
+        }
+
+
+    </script>
+  </body>
+</html>

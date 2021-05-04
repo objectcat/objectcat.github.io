@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>用XMLHttpRequest請求GitHub JSON資料</h1>
+
+    <button id='button1'>Request JSON1</button>
+    <button id='btnClear'>Clear</button>
+    <ul id='EmployeeList'></ul>
+
+    <script type="module">
+        import { $g } from "../modules/helpers.js"
+
+        let ul = $g('#EmployeeList');
+
+        $g('button').forEach((item) => {
+            item.addEventListener('click', () => { ul.innerText = ''; })
+        });
+
+        let btn1 = $g('#button1').addEventListener('click', requestJSON1);
+        $g('#btnClear').addEventListener('click', () => { ul.innerText = ''; })
+
+
+        const url = 'https://raw.githubusercontent.com/objectcat/FileStorage/main/JSON_Array.json';
+        // // const url = 'http://127.0.0.1:5503/XMLHttpRequest/iPad_DataFixed.json';
+
+        let employees = [];
+        let xhr = new XMLHttpRequest();
+        //Ex1
+        function requestJSON1() {
+            xhr.onload = function() {
+                employees = JSON.parse(this.responseText);
+                employees.forEach((emp, index) => {
+                    let li = document.createElement('li');
+                    li.innerText = `${emp.firstname}, ${emp.height},${emp.height},${emp.email}`;
+
+                    ul.appendChild(li);
+                });
+                
+                // this為XMLHttpRequest物件
+                console.log(this);
+            }
+            xhr.open('GET', url);
+            xhr.send();
+        }
+
+    </script>
+</body>
+
+</html>
