@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+  <link rel="stylesheet" href="../reset.css">
+  <title>kobo</title>
+
+  <style>
+    .big-bg {
+      background-image: url(https://authorize.kobo.com/Images/prism_large.png);
+      width: 100%;
+      height: 100%;
+      background-repeat: repeat-x;
+      background-size: inherit;
+      background-color: #e6e6e6;
+    }
+
+    .title-bg {
+      background-image: url(https://authorize.kobo.com/Images/rakuten_logo.png);
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      background-position: center;
+      width: 198px;
+      height: 38px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .item-box {
+      width: 318px;
+
+    }
+
+    .item-title-col {
+      padding: 80px 0 20px 0;
+
+    }
+
+    .item-title-col2 {
+      display: flex;
+      padding: 10px 0 10px;
+      background-color: rgb(255, 255, 255);
+      border: 1px solid black;
+      flex-direction: row-reverse;
+      position: relative;
+
+    }
+
+    .item-title-col2 a {
+      font-size: 14px;
+      line-height: 2em;
+      display: flex;
+      margin: 0 40px 10px 0px;
+      color: black;
+      position: absolute;
+    }
+
+    .user-item {
+      width: 236px;
+      margin: auto;
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+
+    .user-item h1 {
+      width: 236px;
+      font-size: 22px;
+      text-decoration: none;
+
+    }
+
+    .user-item input {
+      width: 236px;
+      line-height: 3.4rem;
+      display: inline-block;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+    }
+
+    .Signin-236 {
+      width: 236px;
+      height: 20px;
+      /* 這是用來排版用的 */
+    }
+
+    .text-user {
+      display: inline;
+      font-size: 8px;
+      line-height: 20px;
+    }
+
+    .text-user span {
+      display: inline;
+      font-size: 8px;
+      line-height: 20px;
+
+    }
+
+    .text-user a {
+      display: inline;
+      font-size: 12px;
+      padding: 0;
+      line-height: 20px;
+    }
+
+    .text-user a:hover {
+      color: #bf0000;
+    }
+
+
+
+    .user-item button {
+      box-sizing: border-box;
+      display: inline-block;
+      background: 0 0;
+      font-style: normal;
+      font-size: 1rem;
+      width: 236px;
+      padding: 0px 5px;
+      border-width: 3px;
+      border-style: solid;
+      border-radius: 0;
+      /* 不用圓角 */
+      text-decoration: none;
+      outline: 0;
+      /* 使用多樣邊框屬性 */
+      cursor: pointer;
+      /* 顯示不同游標 */
+      background-color: #bf0000;
+      color: #fff;
+      border-color: #bf0000;
+      font-weight: 200;
+    }
+
+    .user-item-sigh button:hover {
+      transition: background-color .2s, color .2s;
+      background-color: #fff;
+      color: #bf0000;
+    }
+
+    .Forgot-password a {
+      letter-spacing: 3px;
+      color: black;
+    }
+
+    .Forgot-password :hover {
+      letter-spacing: 3px;
+      color: #bf0000;
+    }
+
+    .Userterms a {
+      letter-spacing: 3px;
+    }
+
+    .or {
+      font-size: 1.4rem;
+      line-height: 25px;
+      line-height: 2.5rem;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .or span {
+      line-height: 0;
+      display: inline-block;
+      position: relative;
+
+    }
+
+    .or span::before {
+      right: 100%;
+      content: '';
+      position: absolute;
+      height: 1px;
+      background-color: #ccc;
+      width: 600px;
+    }
+
+    .or span::after {
+      content: '';
+      position: absolute;
+      height: 1px;
+      background-color: #ccc;
+      width: 600px;
+    }
+
+    .Third-party-login-options {
+      box-sizing: border-box;
+      display: block;
+      background: 0 0;
+      font-style: normal;
+      font-size: 1rem;
+      border-radius: 0;
+      text-decoration: none;
+      outline: 0;
+      cursor: pointer;
+      font-weight: 400;
+      margin: 20px 0 20px 0;
+
+    }
+
+    .Third-party-login-options button {
+      box-sizing: border-box;
+      display: block;
+      background: 0 0;
+      font-style: normal;
+      font-size: 20px;
+      border-radius: 0;
+      text-decoration: none;
+      outline: 0;
+      cursor: pointer;
+      font-weight: 400;
+      border: black solid 1px;
+      color: black;
+      padding: 10px;
+      text-align: left;
+      margin: 0 10px 0 0;
+    }
+
+    .Third-party-login-options img {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      bottom: 5px;
+
+    }
+
+    .Third-party-login-options button:hover {
+      background-color: rgb(255, 255, 255);
+      color: black;
+    }
+
+    .last-text {
+      margin: 5px 0 5px 0;
+      display: flex;
+      justify-content: center;
+
+    }
+    .last-text a:nth-child(1){
+      border-right: 1px solid #ccc;
+      padding-right: 10px;
+      margin-right: 8px;
+      
+    }
+
+    .last-text a {
+      display: inline;
+      font-size: 14px;
+      padding: 0;
+      line-height: 20px;
+      color: black;
+    }
+
+    .last-text a:hover {
+      color: #bf0000;
+    }
+    .last-text-p {
+      color: black;
+      text-align: center;
+    }
+
+    .last-text-p a{
+      color: black;
+      text-align: center;
+    }
+    
+  </style>
+</head>
+
+<body>
+  <div class="big-bg">
+    <div class="d-flex justify-content-center ">
+      <div class="item-box">
+        <div class="item-title-col">
+          <div class="title-bg">
+          </div>
+        </div>
+
+        <div class="item-title-col2">
+          <a href="#">建立Kobo帳戶</a>
+          <div class="user-item">
+
+            <div class="Signin-236"></div>
+            <div class="user-item-sigh">
+              <h1>登入</h1>
+
+              <div class="Signin-236"></div>
+
+
+              <input type="text">
+              <input type="text">
+
+              <div class="text-user">
+                <p>繼續執行即表示您同意接受<a href="">使用條款</a><br>及確認已閱讀<a href="">隱私權政策</a>
+                </p>
+              </div>
+              <div class="Signin-236"></div>
+              <div>
+                <div class="user-item-sigh"><button>登入</button></div>
+
+              </div>
+              <div class="Signin-236"></div>
+
+              <div class="Forgot-password">
+                <a href="#">忘記密碼?</a>
+              </div>
+
+              <div class="or p-5">
+                <span>或</span>
+              </div>
+
+              <div class="Third-party-login-options">
+
+                <button><img
+                    src="https://lh3.googleusercontent.com/proxy/GhLpELeVpXuGzelsKM2qM6R8m-J24N9488DG3KoSnlN98zkS2qB2H_WFjb9EBH14RXn0hCNv-KfbcRmsphF4PSuqUW-Tk8jvYLG61e9taEeKKjswwsCKZGU95Fv5qc1lg3vA4kNQTQ">使用FB登入</button>
+              </div>
+              <div class="Third-party-login-options">
+
+                <button><img
+                    src="data:image/png;base64,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">使用GOOGLE登入</button>
+              </div>
+              <div class="Third-party-login-options">
+
+                <button><img src="https://miro.medium.com/max/630/0*Vc3e4nbAvz4zr9qx.jpg">使用APPLE登入</button>
+              </div>
+
+
+            </div>
+          </div>
+
+
+        </div>
+
+        <div class="last-text">
+          <a href="#">使用條款 </a>
+          <a href="#">隱私權政策 </a>
+          
+        </div>
+        <div class="last-text">
+          <p>©2021 Rakuten Kobo Inc.</p>
+        </div>
+
+        <div class="last-text-p">
+          This site is protected by hCaptcha and its <a href="#"Privacy></a> <a href="#">Policy</a> and <a href="#">Terms of Service</a> apply.
+        </div>
+
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+    integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
+    integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc"
+    crossorigin="anonymous"></script>
+
+
+
+</body>
+
+</html>
